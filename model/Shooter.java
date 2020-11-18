@@ -16,10 +16,10 @@ public class Shooter extends GameElement {
 		super(x, y, 0, 0);
 
 		var size = ShooterElement.SIZE;
-		var s1 = new ShooterElement(x - size, y - size, Color.white, false);
-		var s2 = new ShooterElement(x, y - size, Color.white, false);
-		var s3 = new ShooterElement(x - size, y, Color.white, false);
-		var s4 = new ShooterElement(x, y, Color.white, false);
+		var s1 = new ShooterElement(x - size, y - size, Color.white, false);    // top left
+		var s2 = new ShooterElement(x, y - size, Color.white, false);		    // top right
+		var s3 = new ShooterElement(x - size, y, Color.white, false); 			// bottom left
+		var s4 = new ShooterElement(x, y, Color.white, false); 					// bottom right
 		components.add(s1);
 		components.add(s2);
 		components.add(s3);
