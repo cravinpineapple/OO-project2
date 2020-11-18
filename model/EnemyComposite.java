@@ -136,6 +136,13 @@ public class EnemyComposite extends GameElement {
 		bombs.removeAll(remove);
 	}
 
+	public boolean reachedBottom() {
+		// gets last enemy
+		GameElement lastEnemy = rows.get(rows.size() - 1).get(rows.size() - 1);
+		// returns if enemy has just before player
+		return lastEnemy.y + ENEMY_SIZE >= GameBoard.HEIGHT - ENEMY_SIZE;
+	}
+
 	public void processCollision(Shooter shooter) {
 		var removeBullets = new ArrayList<GameElement>();
 
@@ -172,6 +179,11 @@ public class EnemyComposite extends GameElement {
 
 		shooter.getWeapons().removeAll(removeBullets);
 		bombs.removeAll(removeBombs);
+
+		// enemy vs bottom
+		if (reachedBottom())
+			GameBoard.setGameWon(false);
+			
 	}
 	
 }
