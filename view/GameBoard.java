@@ -19,6 +19,8 @@ public class GameBoard {
 	
 	public static final int WIDTH = 600;
 	public static final int HEIGHT = 400;
+	public static boolean isGameOver = false;
+	public static boolean gameWon = false;
 
 	// fps 
 	public static final int FPS = 20;
@@ -72,14 +74,19 @@ public class GameBoard {
 		quitButton.addActionListener(e -> System.exit(0));
 	}
 
-	public void triggerGameOver(boolean gameWon) {
-		?
+	// ends the game, passed if user won or lost
+	public static void setGameWon(boolean gameWon) {
+		GameBoard.gameWon = gameWon;
+		GameBoard.isGameOver = true;
+	}
 
+	public void gameOver() {
 		if (gameWon) {
 			// win stuff
 		}
 		else {
-			// lose stuff
+			timer.stop();
+			System.out.println("Yo, we lost!");
 		}
 	}
 
