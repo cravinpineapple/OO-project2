@@ -72,6 +72,17 @@ public class GameBoard {
 		quitButton.addActionListener(e -> System.exit(0));
 	}
 
+	public void triggerGameOver(boolean gameWon) {
+		?
+
+		if (gameWon) {
+			// win stuff
+		}
+		else {
+			// lose stuff
+		}
+	}
+
 	public MyCanvas getCanvas() {
 		return canvas;
 	}
