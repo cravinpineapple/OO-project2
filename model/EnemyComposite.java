@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import view.GameBoard;
+import view.GameBoard.ScoreCategory;
 
 public class EnemyComposite extends GameElement {
 
@@ -52,13 +53,14 @@ public class EnemyComposite extends GameElement {
 
 	@Override
 	public void animate() {
+		int tempEnemySize = ENEMY_SIZE * 3;
 		int dx = UNIT_MOVE;
 		int dy = 0;
 		if (movingToRight) {
 			// if enemy is colliding with right wall, start moving left and lower composite by enemy size
 			if (rightEnd() >= GameBoard.WIDTH) {
 				dx = -dx;
-				dy = ENEMY_SIZE;
+				dy = tempEnemySize; //ENEMY_SIZE;
 				movingToRight = false;
 			}
 		}
@@ -67,7 +69,7 @@ public class EnemyComposite extends GameElement {
 			// if enemy is colliding with left wall, start moving left and lower composite by enemy size
 			if (leftEnd() <= 0) {
 				dx = -dx;
-				dy = ENEMY_SIZE;
+				dy = tempEnemySize; //ENEMY_SIZE;
 				movingToRight = true;
 			}
 		}
@@ -154,6 +156,7 @@ public class EnemyComposite extends GameElement {
 					if (e.collideWith(bullet)) {
 						removeEnemies.add(e);
 						removeBullets.add(bullet);
+						GameBoard.increaseScore(ScoreCategory.ENEMY_KILL);
 					}
 				}
 			}
@@ -172,6 +175,7 @@ public class EnemyComposite extends GameElement {
 				if (b.collideWith(bullet)) {
 					removeBombs.add(b);
 					removeBullets.add(bullet);
+					GameBoard.increaseScore(ScoreCategory.BULLET_KILL);
 				}
 
 			}
