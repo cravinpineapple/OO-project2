@@ -88,7 +88,8 @@ public class GameBoard {
 
 	public void gameOver() {
 		if (gameWon) {
-			// win stuff
+			timer.stop();
+			System.out.println("Yo, we won!");
 		}
 		else {
 			timer.stop();
