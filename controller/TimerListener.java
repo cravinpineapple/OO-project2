@@ -29,12 +29,23 @@ public class TimerListener implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		frameCounter++;
 		update();
+		queuePlayerMovement();
 		processEventQueue();
 		processCollision();
 		gameBoard.getCanvas().repaint();
 
 		if (GameBoard.isGameOver)
 			gameBoard.gameOver();
+	}
+
+	private void queuePlayerMovement() {
+		if (PressedKeys.isLeftPressed)
+			eventQueue.add(TimerListener.EventType.KEY_LEFT);
+		else if (PressedKeys.isRightPressed)
+			eventQueue.add(TimerListener.EventType.KEY_RIGHT);
+
+		if (PressedKeys.isSpacePressed)
+			eventQueue.add(TimerListener.EventType.KEY_SPACE);
 	}
 
 	private void processEventQueue() {
@@ -45,7 +56,8 @@ public class TimerListener implements ActionListener {
 			Shooter shooter = gameBoard.getShooter();
 			if (shooter == null)
 				return;
-
+			
+			
 			switch (e) {
 				case KEY_LEFT:
 					shooter.moveLeft();
@@ -58,6 +70,7 @@ public class TimerListener implements ActionListener {
 						shooter.getWeapons().add(new Bullet(shooter.x, shooter.y));
 					break;
 			}
+			
 		}
 
 		if (frameCounter == BOMB_DROP_FREQ) {
@@ -84,6 +97,8 @@ public class TimerListener implements ActionListener {
 
 		for (var e: gameBoard.getCanvas().getGameElements())
 			e.animate();
+
+		System.out.println("Left Pressed: " + PressedKeys.isLeftPressed + "   |   Right Pressed: " + PressedKeys.isRightPressed + "   |   Space Pressed: " + PressedKeys.isSpacePressed);
 	}
 
 	public LinkedList<EventType> getEventQueue() {
