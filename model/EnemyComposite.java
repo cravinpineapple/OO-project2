@@ -12,7 +12,7 @@ import view.GameBoard.ScoreCategory;
 public class EnemyComposite extends GameElement {
 
 	public static final int NROWS = 2;
-	public static final int NCOLS = 1;
+	public static final int NCOLS = 10;
 	public static final int ENEMY_SIZE = 20;
 	public static final int UNIT_MOVE = 5;
 
@@ -205,6 +205,25 @@ public class EnemyComposite extends GameElement {
 
 		shooter.getWeapons().removeAll(removeBullets);
 		bombs.removeAll(removeBombs);
+
+		// bombs vs shooter
+		var removeComponents = new ArrayList<GameElement>();
+		removeBombs.clear();
+
+		// for every bomb, check if collide with any of player components
+		for (var b: bombs) {
+			// getting player components
+			for (var c: shooter.getComponents()) {
+				if (b.collideWith(c)) {
+					removeBombs.add(b);
+					removeComponents.add(c);
+				}
+			}
+		}
+
+		bombs.removeAll(removeBombs);
+		shooter.getComponents().removeAll(removeComponents);
+
 
 		// enemy vs bottom
 		if (reachedBottom())
