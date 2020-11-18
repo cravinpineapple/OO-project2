@@ -12,7 +12,7 @@ import view.GameBoard.ScoreCategory;
 public class EnemyComposite extends GameElement {
 
 	public static final int NROWS = 2;
-	public static final int NCOLS = 10;
+	public static final int NCOLS = 1;
 	public static final int ENEMY_SIZE = 20;
 	public static final int UNIT_MOVE = 5;
 
@@ -53,7 +53,7 @@ public class EnemyComposite extends GameElement {
 
 	@Override
 	public void animate() {
-		int tempEnemySize = ENEMY_SIZE * 3;
+		int tempEnemySize = ENEMY_SIZE;
 		int dx = UNIT_MOVE;
 		int dy = 0;
 		if (movingToRight) {
@@ -101,6 +101,20 @@ public class EnemyComposite extends GameElement {
 		return xEnd;
 	}
 
+	private int bottomEnd() {
+		int yEnd = -100;
+		for (var row: rows) {
+			if (row.size() == 0)
+				continue;
+			
+			int y = row.get(row.size() - 1).y + ENEMY_SIZE;
+			if (y > yEnd)
+				yEnd = y;
+		}
+
+		return yEnd;
+	}
+
 	private int leftEnd() {
 		int xEnd = 9000;
 		for (var row: rows) {
@@ -139,10 +153,18 @@ public class EnemyComposite extends GameElement {
 	}
 
 	public boolean reachedBottom() {
-		// gets last enemy
-		GameElement lastEnemy = rows.get(rows.size() - 1).get(rows.size() - 1);
-		// returns if enemy has just before player
-		return lastEnemy.y + ENEMY_SIZE >= GameBoard.HEIGHT - ENEMY_SIZE;
+		return bottomEnd() >= GameBoard.HEIGHT - ENEMY_SIZE;
+	}
+
+	public void checkAllEnemiesKilled() {
+		boolean enemiesGone = true;
+		for (var r: rows) {
+			if (!r.isEmpty())
+				enemiesGone = false;
+		}
+
+		if (enemiesGone)
+			GameBoard.setGameWon(true);
 	}
 
 	public void processCollision(Shooter shooter) {
