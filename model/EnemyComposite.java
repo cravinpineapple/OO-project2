@@ -53,24 +53,30 @@ public class EnemyComposite extends GameElement {
 	@Override
 	public void animate() {
 		int dx = UNIT_MOVE;
+		int dy = 0;
 		if (movingToRight) {
+			// if enemy is colliding with right wall, start moving left and lower composite by enemy size
 			if (rightEnd() >= GameBoard.WIDTH) {
 				dx = -dx;
+				dy = ENEMY_SIZE;
 				movingToRight = false;
 			}
 		}
 		else {
 			dx = -dx;
+			// if enemy is colliding with left wall, start moving left and lower composite by enemy size
 			if (leftEnd() <= 0) {
 				dx = -dx;
+				dy = ENEMY_SIZE;
 				movingToRight = true;
 			}
 		}
 
-		// update x loc
+		// update x loc and y loc
 		for (var row: rows) {
 			for (var e: row) {
 				e.x += dx;
+				e.y += dy;
 			}
 		}
 
