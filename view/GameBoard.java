@@ -19,8 +19,14 @@ public class GameBoard {
 	
 	public static final int WIDTH = 600;
 	public static final int HEIGHT = 400;
+
 	public static boolean isGameOver = false;
 	public static boolean gameWon = false;
+	public static int score = 0;
+
+	public enum ScoreCategory {
+		ENEMY_KILL, BULLET_KILL, POWERUP_GET
+	}
 
 	// fps 
 	public static final int FPS = 20;
@@ -87,6 +93,20 @@ public class GameBoard {
 		else {
 			timer.stop();
 			System.out.println("Yo, we lost!");
+		}
+	}
+
+	public static void increaseScore(ScoreCategory pointCategory) {
+		switch (pointCategory) {
+			case ENEMY_KILL:
+				score += 10;
+				break;
+			case BULLET_KILL:
+				score += 1;
+				break;
+			case POWERUP_GET:
+				score += 10;
+				break;
 		}
 	}
 
