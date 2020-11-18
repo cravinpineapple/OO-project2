@@ -97,8 +97,6 @@ public class TimerListener implements ActionListener {
 
 		for (var e: gameBoard.getCanvas().getGameElements())
 			e.animate();
-
-		System.out.println("Left Pressed: " + PressedKeys.isLeftPressed + "   |   Right Pressed: " + PressedKeys.isRightPressed + "   |   Space Pressed: " + PressedKeys.isSpacePressed);
 	}
 
 	public LinkedList<EventType> getEventQueue() {
