@@ -32,7 +32,9 @@ public class TimerListener implements ActionListener {
 		processEventQueue();
 		processCollision();
 		gameBoard.getCanvas().repaint();
-		
+
+		if (GameBoard.isGameOver)
+			gameBoard.gameOver();
 	}
 
 	private void processEventQueue() {
