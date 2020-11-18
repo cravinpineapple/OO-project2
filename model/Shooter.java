@@ -8,7 +8,7 @@ import view.GameBoard;
 
 public class Shooter extends GameElement {
 
-	public static final int UNIT_MOVE = 10;
+	public static final int UNIT_MOVE = 5;
 	public static final int MAX_BULLETS = 3;
 
 	private ArrayList<GameElement> components = new ArrayList<>();
