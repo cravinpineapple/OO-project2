@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 
+import view.GameBoard;
+
 public class Shooter extends GameElement {
 
 	public static final int UNIT_MOVE = 10;
@@ -68,6 +70,15 @@ public class Shooter extends GameElement {
 
 	public ArrayList<GameElement> getWeapons() {
 		return weapons;
+	}
+
+	public ArrayList<GameElement> getComponents() {
+		return components;
+	}
+	
+	public void checkPlayerComponents() {
+		if (components.isEmpty())
+			GameBoard.setGameWon(false);
 	}
 
 	@Override
