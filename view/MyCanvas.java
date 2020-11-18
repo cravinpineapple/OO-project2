@@ -31,7 +31,7 @@ public class MyCanvas extends JPanel {
 			String gameOutcomeText = GameBoard.gameWon ? "You Won!" : "You Lost!";
 			Color gameOutcomeColor = GameBoard.gameWon ? Color.blue : Color.red;
 			TextDraw gameOverText = new TextDraw("Game Over, " + gameOutcomeText, 144, 190, gameOutcomeColor, 30);
-			TextDraw scoreText = new TextDraw("Score: " + "XXX", gameOverText.x + 120, gameOverText.y + 30, Color.white, 15);
+			TextDraw scoreText = new TextDraw("Score: " + gameBoard.score, gameOverText.x + 120, gameOverText.y + 30, Color.white, 15);
 			gameOverText.render(g2);
 			scoreText.render(g2);
 
