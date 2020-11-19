@@ -6,6 +6,11 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Random;
 
+import model.builderStrategy.DoubleBulletsPowerBuilder;
+import model.builderStrategy.ExtraShooterPowerBuilder;
+import model.builderStrategy.PowerBuilderDirector;
+import model.builderStrategy.ShieldPowerBuilder;
+import model.builderStrategy.SpeedPowerBuilder;
 import view.GameBoard;
 import view.GameBoard.ScoreCategory;
 
@@ -18,13 +23,16 @@ public class EnemyComposite extends GameElement {
 
 	private ArrayList<ArrayList<GameElement>> rows;
 	private ArrayList<GameElement> bombs;
+	private ArrayList<GameElement> powers;
 	private boolean movingToRight = true;
 
 	private Random random = new Random();
+	private GameBoard gameBoard;
 	
 	public EnemyComposite() {
 		rows = new ArrayList<>();
 		bombs = new ArrayList<>();
+		powers = new ArrayList<>();
 
 		for (int r = 0; r < NROWS; r++) {
 			var oneRow = new ArrayList<GameElement>();
@@ -48,6 +56,11 @@ public class EnemyComposite extends GameElement {
 		// renders bombs
 		for (var b: bombs) {
 			b.render(g2);
+		}
+
+		// renders powerups
+		for (var p: powers) {
+			p.render(g2);
 		}
 	}
 
@@ -85,6 +98,9 @@ public class EnemyComposite extends GameElement {
 		// animate bombs
 		for (var b: bombs)
 			b.animate();
+
+		for (var p: powers)
+			p.animate();
 	}
 
 	private int rightEnd() {
@@ -167,6 +183,26 @@ public class EnemyComposite extends GameElement {
 			GameBoard.setGameWon(true);
 	}
 
+	// passes in cords for spawn location (at enemy death location)
+	private void powerUpChance(int spawnX, int spawnY) {
+		if (true) {
+			PowerBuilderDirector pbDirector = gameBoard.getPowerBuilderDirector();
+			float randomPowerUp = random.nextFloat();
+			
+			if (randomPowerUp < 0.1F)
+				pbDirector.setPowerBuilder(new ExtraShooterPowerBuilder());
+			else if (randomPowerUp < 0.4F)
+				pbDirector.setPowerBuilder(new SpeedPowerBuilder());
+			else if (randomPowerUp < 0.7F)
+				pbDirector.setPowerBuilder(new DoubleBulletsPowerBuilder());
+			else
+				pbDirector.setPowerBuilder(new ShieldPowerBuilder());
+
+			pbDirector.createPower(spawnX, spawnY);
+			powers.add(pbDirector.getPower());
+		} 
+	}
+
 	public void processCollision(Shooter shooter) {
 		var removeBullets = new ArrayList<GameElement>();
 
@@ -179,6 +215,7 @@ public class EnemyComposite extends GameElement {
 						removeEnemies.add(e);
 						removeBullets.add(bullet);
 						GameBoard.increaseScore(ScoreCategory.ENEMY_KILL);
+						powerUpChance(bullet.x, bullet.y);
 					}
 				}
 			}
@@ -224,11 +261,29 @@ public class EnemyComposite extends GameElement {
 		bombs.removeAll(removeBombs);
 		shooter.getComponents().removeAll(removeComponents);
 
+		// powers vs shooter
+		var removePowers = new ArrayList<GameElement>(); // to remove power ups once collided with shooter
+
+		for (var p: powers) {
+			for (var c: shooter.getComponents()) {
+				if (p.collideWith(c)) 
+					removePowers.add(p);
+				else if (p.y >= GameBoard.HEIGHT)
+					removePowers.add(p);
+			}
+		}
+
+		System.out.println(powers.size());
+		powers.removeAll(removePowers);
+
 
 		// enemy vs bottom
 		if (reachedBottom())
 			GameBoard.setGameWon(false);
-			
+	}
+
+	public void setGameBoard(GameBoard gameBoard) {
+		this.gameBoard = gameBoard;
 	}
 	
 }
