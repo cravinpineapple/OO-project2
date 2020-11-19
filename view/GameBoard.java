@@ -14,6 +14,7 @@ import controller.TimerListener;
 import model.EnemyComposite;
 import model.Shooter;
 import model.ShooterElement;
+import model.builderStrategy.PowerBuilderDirector;
 
 public class GameBoard {
 	
@@ -39,6 +40,7 @@ public class GameBoard {
 
 	private Shooter shooter;
 	private EnemyComposite enemyComposite;
+	private PowerBuilderDirector powerBuilderDirector;
 
 	public GameBoard(JFrame window) {
 		this.window = window;
@@ -71,6 +73,8 @@ public class GameBoard {
 		startButton.addActionListener(e -> {
 			shooter = new Shooter(GameBoard.WIDTH / 2, GameBoard.HEIGHT - ShooterElement.SIZE);
 			enemyComposite = new EnemyComposite();
+			enemyComposite.setGameBoard(this);
+			powerBuilderDirector = new PowerBuilderDirector(this);
 			canvas.getGameElements().clear();
 			canvas.getGameElements().add(shooter);
 			canvas.getGameElements().add(enemyComposite);
@@ -129,6 +133,10 @@ public class GameBoard {
 
 	public EnemyComposite getEnemyComposite() {
 		return enemyComposite;
+	}
+
+	public PowerBuilderDirector getPowerBuilderDirector() {
+		return powerBuilderDirector;
 	}
 
 }
