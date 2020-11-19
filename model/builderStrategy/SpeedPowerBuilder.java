@@ -2,6 +2,7 @@ package model.builderStrategy;
 
 import java.awt.Color;
 
+// provides temporary speed boost
 public class SpeedPowerBuilder extends PowerBuilder {
 
 	@Override

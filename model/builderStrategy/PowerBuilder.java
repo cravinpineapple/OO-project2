@@ -1,7 +1,9 @@
 package model.builderStrategy;
 
+// builder in builder strategy
 public abstract class PowerBuilder {
 
+	// power we are creating
 	Power power;
 
 	public PowerBuilder() {
@@ -20,6 +22,7 @@ public abstract class PowerBuilder {
 		power.setPosition(x, y);
 	}
 
+	// must override in child classes
 	public abstract void buildFallSpeed();
 	public abstract void buildColor();
 	public abstract void buildSize();

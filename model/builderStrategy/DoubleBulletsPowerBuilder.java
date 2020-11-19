@@ -2,6 +2,7 @@ package model.builderStrategy;
 
 import java.awt.Color;
 
+// temporarily doubles amount of bullets shooter can have on field at one time
 public class DoubleBulletsPowerBuilder extends PowerBuilder {
 
 	@Override

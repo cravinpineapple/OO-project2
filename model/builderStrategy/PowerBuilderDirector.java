@@ -2,9 +2,12 @@ package model.builderStrategy;
 
 import view.GameBoard;
 
+// Director for builder Strategy
 public class PowerBuilderDirector {
 	
+	// reference for builder (to direct creating of bombs)
 	private PowerBuilder powerBuilder;
+	// reference to gameBoard so changes can be made to shooter
 	private GameBoard gameBoard;
 
 	public PowerBuilderDirector(GameBoard gameBoard) {

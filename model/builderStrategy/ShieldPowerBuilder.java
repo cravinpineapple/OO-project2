@@ -2,6 +2,7 @@ package model.builderStrategy;
 
 import java.awt.Color;
 
+// provides temporary shield from bombs
 public class ShieldPowerBuilder extends PowerBuilder {
 	
 	@Override

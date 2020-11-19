@@ -2,6 +2,7 @@ package model.builderStrategy;
 
 import java.awt.Color;
 
+// gives extra shooter that flies near ship
 public class ExtraShooterPowerBuilder extends PowerBuilder {
 
 	@Override
