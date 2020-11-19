@@ -21,7 +21,7 @@ public class PowerBuilderDirector {
 
 	// x and y passed for spawn position
 	public void createPower(int x, int y) {
-		powerBuilder.createBomb();
+		powerBuilder.createPower();
 		powerBuilder.buildFallSpeed();
 		powerBuilder.buildSize();
 		powerBuilder.buildStrategy();

@@ -8,7 +8,7 @@ public abstract class PowerBuilder {
 
 	}
 
-	public void createBomb() {
+	public void createPower() {
 		power = new Power();
 	}
 
