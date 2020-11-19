@@ -7,15 +7,16 @@ import view.GameBoard;
 
 public class KeyController implements KeyListener {
 
-	//private GameBoard gameBoard;
+	private GameBoard gameBoard;
 
 	public KeyController(GameBoard gameBoard) {
-		//this.gameBoard = gameBoard;
+		this.gameBoard = gameBoard;
 	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {
 		int keyCode = e.getKeyCode();
+		var eventQueue = gameBoard.getTimerListener().getEventQueue();
 
 		switch (keyCode) {
 			case KeyEvent.VK_LEFT:
@@ -25,7 +26,7 @@ public class KeyController implements KeyListener {
 				PressedKeys.keyPressed(PressedKeys.Keys.RIGHT);
 				break;
 			case KeyEvent.VK_SPACE:
-				PressedKeys.keyPressed(PressedKeys.Keys.SPACE);
+				eventQueue.add(TimerListener.EventType.KEY_SPACE);
 				break;
 		}
 	}
@@ -45,7 +46,7 @@ public class KeyController implements KeyListener {
 				PressedKeys.keyReleased(PressedKeys.Keys.RIGHT);
 				break;
 			case KeyEvent.VK_SPACE:
-				PressedKeys.keyReleased(PressedKeys.Keys.SPACE);
+				//PressedKeys.keyReleased(PressedKeys.Keys.SPACE);
 				break;
 		}
 	}

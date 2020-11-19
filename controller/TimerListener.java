@@ -43,9 +43,6 @@ public class TimerListener implements ActionListener {
 			eventQueue.add(TimerListener.EventType.KEY_LEFT);
 		else if (PressedKeys.isRightPressed)
 			eventQueue.add(TimerListener.EventType.KEY_RIGHT);
-
-		if (PressedKeys.isSpacePressed)
-			eventQueue.add(TimerListener.EventType.KEY_SPACE);
 	}
 
 	private void processEventQueue() {
