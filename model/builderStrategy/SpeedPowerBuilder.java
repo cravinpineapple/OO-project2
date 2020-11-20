@@ -21,8 +21,8 @@ public class SpeedPowerBuilder extends PowerBuilder {
 	}
 
 	@Override
-	public void buildStrategy() {
-		
+	public void buildPowerType() {
+		power.setPowerType(Power.PowerType.SPEED);
 	}
 
 	

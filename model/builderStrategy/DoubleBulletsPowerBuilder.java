@@ -21,8 +21,8 @@ public class DoubleBulletsPowerBuilder extends PowerBuilder {
 	}
 
 	@Override
-	public void buildStrategy() {
-		
+	public void buildPowerType() {
+		power.setPowerType(Power.PowerType.EXTRA_BULLETS);
 	}
 	
 }

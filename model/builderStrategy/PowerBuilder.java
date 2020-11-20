@@ -26,5 +26,5 @@ public abstract class PowerBuilder {
 	public abstract void buildFallSpeed();
 	public abstract void buildColor();
 	public abstract void buildSize();
-	public abstract void buildStrategy();
+	public abstract void buildPowerType();
 }

@@ -27,7 +27,7 @@ public class PowerBuilderDirector {
 		powerBuilder.createPower();
 		powerBuilder.buildFallSpeed();
 		powerBuilder.buildSize();
-		powerBuilder.buildStrategy();
+		powerBuilder.buildPowerType();
 		powerBuilder.buildColor();
 		powerBuilder.setPosition(x, y);
 	}
