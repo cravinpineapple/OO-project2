@@ -8,6 +8,7 @@ import java.util.Random;
 
 import model.builderStrategy.DoubleBulletsPowerBuilder;
 import model.builderStrategy.ExtraShooterPowerBuilder;
+import model.builderStrategy.Power;
 import model.builderStrategy.PowerBuilderDirector;
 import model.builderStrategy.ShieldPowerBuilder;
 import model.builderStrategy.SpeedPowerBuilder;
@@ -243,6 +244,18 @@ public class EnemyComposite extends GameElement {
 		shooter.getWeapons().removeAll(removeBullets);
 		bombs.removeAll(removeBombs);
 
+		// bombs vs shield
+		removeBombs.clear();
+
+		if (shooter.getShield() != null) {
+			for (var b: bombs) {
+				if (b.collideWith(shooter.getShield()))
+					removeBombs.add(b);
+			}
+		}
+
+		bombs.removeAll(removeBombs);
+
 		// bombs vs shooter
 		var removeComponents = new ArrayList<GameElement>();
 		removeBombs.clear();
@@ -266,14 +279,17 @@ public class EnemyComposite extends GameElement {
 
 		for (var p: powers) {
 			for (var c: shooter.getComponents()) {
-				if (p.collideWith(c)) 
+				if (p.collideWith(c)) {
 					removePowers.add(p);
+					// type cast GameElemnt p to Power p so we can access activatePower(shooter)
+					Power power = (Power) p;
+					power.activatePower(shooter);
+				}
 				else if (p.y >= GameBoard.HEIGHT)
 					removePowers.add(p);
 			}
 		}
-
-		System.out.println(powers.size());
+		
 		powers.removeAll(removePowers);
 
 
