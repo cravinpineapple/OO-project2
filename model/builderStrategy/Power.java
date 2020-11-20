@@ -4,10 +4,16 @@ import java.awt.Graphics2D;
 import java.awt.Color;
 
 import model.GameElement;
+import model.Shooter;
 
 public class Power extends GameElement {
 
+	public enum PowerType {
+		SPEED, SHIELD, EXTRA_BULLETS, EXTRA_SHOOTER
+	}
+
 	private int fallSpeed;
+	private PowerType powerType;
 
 	public Power() {
 		filled = true;
@@ -31,6 +37,27 @@ public class Power extends GameElement {
 		this.fallSpeed = fallSpeed;
 	}
 
+	public void setPowerType(PowerType powerType) {
+		this.powerType = powerType;
+	}
+
+	public void activatePower(Shooter shooter) {
+		switch (powerType) {
+			case SPEED:
+				// startPowerTimer
+				Shooter.SPEED_BOOST = Shooter.UNIT_MOVE;
+				break;
+			case SHIELD:
+				shooter.activateShield();
+				break;
+			case EXTRA_BULLETS:
+				Shooter.EXTRA_BULLETS = Shooter.MAX_BULLETS;
+				break;
+			case EXTRA_SHOOTER:
+				break;
+		}
+	}
+
 	@Override
 	public void render(Graphics2D g2) {
 		g2.setColor(color);
@@ -45,6 +72,13 @@ public class Power extends GameElement {
 	@Override
 	public void animate() {
 		super.y += fallSpeed;
+	}
+
+	@Override
+	public String toString() {
+		return "PowerType: " + powerType + " || Fall Speed: " + fallSpeed + " || Color: " + color + 
+				" || Position(x, y): (" + x + ", " + y + ") || Size(W, H): (" + width + ", " 
+				+ height + ")";
 	}
 
 }
