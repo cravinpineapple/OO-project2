@@ -219,12 +219,25 @@ public class EnemyComposite extends GameElement {
 						powerUpChance(bullet.x, bullet.y);
 					}
 				}
+
+				if (shooter.getExtraShooter() != null) {
+					for (var bullet: shooter.getExtraShooter().getWeapons()) {
+						if (e.collideWith(bullet)) {
+							removeEnemies.add(e);
+							removeBullets.add(bullet);
+							GameBoard.increaseScore(ScoreCategory.ENEMY_KILL);
+							powerUpChance(bullet.x, bullet.y);
+						}
+					}
+				}
 			}
 
 			row.removeAll(removeEnemies);
 		}
 
 		shooter.getWeapons().removeAll(removeBullets);
+		if (shooter.getExtraShooter() != null)
+			shooter.getExtraShooter().getWeapons().removeAll(removeBullets);
 
 		// bullets vs bombs
 		var removeBombs = new ArrayList<GameElement>();
@@ -237,11 +250,22 @@ public class EnemyComposite extends GameElement {
 					removeBullets.add(bullet);
 					GameBoard.increaseScore(ScoreCategory.BULLET_KILL);
 				}
+			}
 
+			if (shooter.getExtraShooter() != null) {
+				for (var bullet: shooter.getExtraShooter().getWeapons()) {
+					if (b.collideWith(bullet)) {
+						removeBullets.add(bullet);
+						removeBombs.add(b);
+						GameBoard.increaseScore(ScoreCategory.BULLET_KILL);
+					}
+				}
 			}
 		}
 
 		shooter.getWeapons().removeAll(removeBullets);
+		if (shooter.getExtraShooter() != null)
+			shooter.getExtraShooter().getWeapons().removeAll(removeBullets);
 		bombs.removeAll(removeBombs);
 
 		// bombs vs shield
@@ -273,6 +297,21 @@ public class EnemyComposite extends GameElement {
 
 		bombs.removeAll(removeBombs);
 		shooter.getComponents().removeAll(removeComponents);
+
+		// bombs vs extra shooter
+		removeBombs.clear();
+
+		if (shooter.getExtraShooter() != null) {
+			for (var b: bombs) {
+				if (b.collideWith(shooter.getExtraShooter().getComponents().get(0))) {
+					removeBombs.add(b);
+					shooter.deactivateExtraShooter();
+					break;
+				}
+			}
+		}
+
+		bombs.removeAll(removeBombs);
 
 		// powers vs shooter
 		var removePowers = new ArrayList<GameElement>(); // to remove power ups once collided with shooter
