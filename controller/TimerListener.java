@@ -63,8 +63,16 @@ public class TimerListener implements ActionListener {
 					shooter.moveRight();
 					break;
 				case KEY_SPACE:
+					// fires from main shooter
 					if (shooter.canFireMoreBullets())
 						shooter.getWeapons().add(new Bullet(shooter.x, shooter.y));
+
+					// fires from extra shooter
+					Shooter extra = shooter.getExtraShooter();
+					if (extra != null) {
+						if (extra.canFireMoreBullets())
+							extra.getWeapons().add(new Bullet(extra.x, extra.y));
+					}
 					break;
 			}
 			
@@ -81,6 +89,8 @@ public class TimerListener implements ActionListener {
 		var enemyComposite = gameBoard.getEnemyComposite();
 		
 		shooter.removeBulletsOutOfBound();
+		if (shooter.getExtraShooter() != null)
+			shooter.getExtraShooter().removeBulletsOutOfBound();
 		enemyComposite.removeBombsOutOfBound();
 		enemyComposite.processCollision(shooter);
 	}
