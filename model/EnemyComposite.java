@@ -71,7 +71,7 @@ public class EnemyComposite extends GameElement {
 		int dy = 0;
 		if (movingToRight) {
 			// if enemy is colliding with right wall, start moving left and lower composite by enemy size
-			if (rightEnd() >= GameBoard.WIDTH) {
+			if (rightEnd() >= GameBoard.GAME_SCREEN_WIDTH) {
 				dx = -dx;
 				dy = tempEnemySize; //ENEMY_SIZE;
 				movingToRight = false;
@@ -160,7 +160,7 @@ public class EnemyComposite extends GameElement {
 
 		// checks y position if out of bound and adds to remove array
 		for (var b: bombs) {
-			if (b.y >= GameBoard.HEIGHT)
+			if (b.y >= GameBoard.GAME_SCREEN_HEIGHT)
 				remove.add(b);
 		}
 
@@ -169,7 +169,7 @@ public class EnemyComposite extends GameElement {
 	}
 
 	public boolean reachedBottom() {
-		return bottomEnd() >= GameBoard.HEIGHT - ENEMY_SIZE;
+		return bottomEnd() >= GameBoard.GAME_SCREEN_HEIGHT - ENEMY_SIZE;
 	}
 
 	public void checkAllEnemiesKilled() {
@@ -322,8 +322,10 @@ public class EnemyComposite extends GameElement {
 					// type cast GameElemnt p to Power p so we can access activatePower(shooter)
 					Power power = (Power) p;
 					power.activatePower(shooter);
+					// starts power up timer
+					gameBoard.getPowerUpMeter().startPowerUpMeter();
 				}
-				else if (p.y >= GameBoard.HEIGHT)
+				else if (p.y >= GameBoard.GAME_SCREEN_HEIGHT)
 					removePowers.add(p);
 			}
 		}
