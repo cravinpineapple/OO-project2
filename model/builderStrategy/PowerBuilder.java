@@ -1,5 +1,7 @@
 package model.builderStrategy;
 
+import model.Power;
+
 // builder in builder strategy
 public abstract class PowerBuilder {
 

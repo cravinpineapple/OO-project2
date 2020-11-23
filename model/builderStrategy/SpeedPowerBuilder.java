@@ -1,5 +1,7 @@
 package model.builderStrategy;
 
+import model.Power;
+
 import java.awt.Color;
 
 // provides temporary speed boost

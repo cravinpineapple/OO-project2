@@ -1,10 +1,7 @@
-package model.builderStrategy;
+package model;
 
 import java.awt.Graphics2D;
 import java.awt.Color;
-
-import model.GameElement;
-import model.Shooter;
 
 public class Power extends GameElement {
 

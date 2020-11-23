@@ -2,6 +2,8 @@ package model.builderStrategy;
 
 import java.awt.Color;
 
+import model.Power;
+
 // provides temporary shield from bombs
 public class ShieldPowerBuilder extends PowerBuilder {
 	

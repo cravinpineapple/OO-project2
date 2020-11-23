@@ -1,6 +1,7 @@
 package model.builderStrategy;
 
 import view.GameBoard;
+import model.Power;
 
 // Director for builder Strategy
 public class PowerBuilderDirector {

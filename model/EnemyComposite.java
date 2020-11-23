@@ -8,7 +8,6 @@ import java.util.Random;
 
 import model.builderStrategy.DoubleBulletsPowerBuilder;
 import model.builderStrategy.ExtraShooterPowerBuilder;
-import model.builderStrategy.Power;
 import model.builderStrategy.PowerBuilderDirector;
 import model.builderStrategy.ShieldPowerBuilder;
 import model.builderStrategy.SpeedPowerBuilder;

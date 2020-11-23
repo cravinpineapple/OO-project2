@@ -1,6 +1,7 @@
 package model.builderStrategy;
 
 import java.awt.Color;
+import model.Power;
 
 // gives extra shooter that flies near ship
 public class ExtraShooterPowerBuilder extends PowerBuilder {
