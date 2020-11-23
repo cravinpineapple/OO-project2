@@ -42,13 +42,13 @@ public class Power extends GameElement {
 		// startPowerTimer
 		switch (powerType) {
 			case SPEED:
-				Shooter.SPEED_BOOST = Shooter.UNIT_MOVE;
+				shooter.activateSpeed();
 				break;
 			case SHIELD:
 				shooter.activateShield();
 				break;
 			case EXTRA_BULLETS:
-				Shooter.EXTRA_BULLETS = Shooter.MAX_BULLETS;
+				shooter.activateExtraBullets();
 				break;
 			case EXTRA_SHOOTER:
 				shooter.activateExtraShooter();
