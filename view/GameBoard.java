@@ -86,6 +86,7 @@ public class GameBoard {
 			enemyComposite.setGameBoard(this);
 			powerBuilderDirector = new PowerBuilderDirector(this);
 			powerUpMeter = new PowerUpMeter(150 + 20, GameBoard.GAME_SCREEN_HEIGHT + 45, GAME_SCREEN_WIDTH - 190, 40, Color.white);
+			powerUpMeter.setGameBoard(this);
 			canvas.getGameElements().clear();
 			canvas.getGameElements().add(powerUpMeter);
 			canvas.getGameElements().add(scoreText);
