@@ -34,10 +34,19 @@ public class MyCanvas extends JPanel {
 			TextDraw scoreText = new TextDraw("Score: " + gameBoard.score, gameOverText.x + 120, gameOverText.y + 30, Color.white, 15);
 			gameOverText.render(g2);
 			scoreText.render(g2);
-
 			return;
 		}
+		else if (!GameBoard.isGameWaiting) {
+			// draws line on screen to seperate game from menu
+			g2.setColor(Color.white);
+			g2.fillRect(0, GameBoard.GAME_SCREEN_HEIGHT + 10, GameBoard.GAME_SCREEN_WIDTH, 10);
+			g2.fillRect(150, GameBoard.GAME_SCREEN_HEIGHT + 10, 10, GameBoard.HEIGHT - GameBoard.GAME_SCREEN_HEIGHT + 10);
+		}
 
+		
+		gameBoard.getScoreText().setText("Score: " + GameBoard.score);
+
+		// draws game elements
 		for (var e: gameElements) {
 			e.render(g2);
 		}
