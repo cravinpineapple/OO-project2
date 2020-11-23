@@ -19,6 +19,12 @@ public class Shooter extends GameElement {
 	public Shooter extraShooter;
 	private boolean isExtraShooter = false;
 
+	// power management
+	public enum PowerStatus {
+		NONE, SPEED, SHIELD, EXTRA_BULLETS, EXTRA_SHOOTER
+	}
+	PowerStatus powerStatus = PowerStatus.NONE;
+
 	public Shooter(int x, int y) {
 		super(x, y, 0, 0);
 
@@ -124,21 +130,45 @@ public class Shooter extends GameElement {
 	// shield power activate
 	public void activateShield() {
 		shield = new Shield(this);
+		powerStatus = PowerStatus.SHIELD;
 	}
 
 	// shield power deactivate
 	public void deactivateShield() {
 		shield = null;
+		powerStatus = PowerStatus.NONE;
 	}
 
 	// extra shooter activate
 	public void activateExtraShooter() {
 		extraShooter = new Shooter(x + ShooterElement.SIZE * 2 + 10, y - 3, ShooterElement.SIZE / 4);
+		powerStatus = PowerStatus.EXTRA_SHOOTER;
 	}
 	
 	// extra shooter deactivate
 	public void deactivateExtraShooter() {
 		extraShooter = null;
+		powerStatus = PowerStatus.NONE;
+	}
+
+	public void activateSpeed() {
+		Shooter.SPEED_BOOST = Shooter.UNIT_MOVE;
+		powerStatus = PowerStatus.SPEED;
+	}
+
+	public void deactivateSpeed() {
+		Shooter.SPEED_BOOST = 0;
+		powerStatus = PowerStatus.NONE;
+	}
+
+	public void activateExtraBullets() {
+		Shooter.EXTRA_BULLETS = Shooter.MAX_BULLETS;
+		powerStatus = PowerStatus.EXTRA_BULLETS;
+	}
+
+	public void deactivateExtraBullets() {
+		Shooter.EXTRA_BULLETS = 0;
+		powerStatus = PowerStatus.NONE;
 	}
 	
 	public void checkPlayerComponents() {
