@@ -304,7 +304,7 @@ public class EnemyComposite extends GameElement {
 			for (var b: bombs) {
 				if (b.collideWith(shooter.getExtraShooter().getComponents().get(0))) {
 					removeBombs.add(b);
-					shooter.deactivateExtraShooter();
+					shooter.deactivatePower();
 					break;
 				}
 			}
@@ -321,9 +321,10 @@ public class EnemyComposite extends GameElement {
 					removePowers.add(p);
 					// type cast GameElemnt p to Power p so we can access activatePower(shooter)
 					Power power = (Power) p;
-					power.activatePower(shooter);
-					// starts power up timer
+					// starts power up timer & clear current power up
 					gameBoard.getPowerUpMeter().startPowerUpMeter();
+					// start new power up
+					power.activatePower(shooter);
 				}
 				else if (p.y >= GameBoard.GAME_SCREEN_HEIGHT)
 					removePowers.add(p);
