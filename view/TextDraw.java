@@ -26,8 +26,15 @@ public class TextDraw extends GameElement {
 
 	@Override
 	public void animate() {
-		// TODO Auto-generated method stub
 
+	}
+
+	public void setText(String text) {
+		this.text = text;
+	}
+
+	public String getText() {
+		return text;
 	}
 	
 
