@@ -40,20 +40,8 @@ public class Power extends GameElement {
 
 	public void activatePower(Shooter shooter) {
 		// startPowerTimer
-		switch (powerType) {
-			case SPEED:
-				shooter.activateSpeed();
-				break;
-			case SHIELD:
-				shooter.activateShield();
-				break;
-			case EXTRA_BULLETS:
-				shooter.activateExtraBullets();
-				break;
-			case EXTRA_SHOOTER:
-				shooter.activateExtraShooter();
-				break;
-		}
+
+		shooter.activatePower(powerType);
 	}
 
 	@Override
