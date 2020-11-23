@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 
+import model.Power.PowerType;
 import view.GameBoard;
 
 public class Shooter extends GameElement {
@@ -127,46 +128,82 @@ public class Shooter extends GameElement {
 		return components;
 	}
 
+	public void deactivatePower() {
+		switch (powerStatus) {
+			case SHIELD:
+				deactivateShield();
+				break;
+			case SPEED:
+				deactivateSpeed();
+				break;
+			case EXTRA_BULLETS:
+				deactivateExtraBullets();
+				break;
+			case EXTRA_SHOOTER:
+				deactivateExtraShooter();
+				break;
+			case NONE:
+				break;
+		}
+	}
+
+	public void activatePower(PowerType powerType) {
+		switch (powerType) {
+			case SPEED:
+				activateSpeed();
+				break;
+			case SHIELD:
+				activateShield();
+				break;
+			case EXTRA_BULLETS:
+				activateExtraBullets();
+				break;
+			case EXTRA_SHOOTER:
+				activateExtraShooter();
+				break;
+		}
+	}
+
 	// shield power activate
-	public void activateShield() {
+	private void activateShield() {
 		shield = new Shield(this);
 		powerStatus = PowerStatus.SHIELD;
 	}
 
 	// shield power deactivate
-	public void deactivateShield() {
+	private void deactivateShield() {
 		shield = null;
 		powerStatus = PowerStatus.NONE;
 	}
 
 	// extra shooter activate
-	public void activateExtraShooter() {
+	private void activateExtraShooter() {
 		extraShooter = new Shooter(x + ShooterElement.SIZE * 2 + 10, y - 3, ShooterElement.SIZE / 4);
 		powerStatus = PowerStatus.EXTRA_SHOOTER;
 	}
 	
 	// extra shooter deactivate
-	public void deactivateExtraShooter() {
+	private void deactivateExtraShooter() {
 		extraShooter = null;
 		powerStatus = PowerStatus.NONE;
 	}
 
-	public void activateSpeed() {
+	private void activateSpeed() {
 		Shooter.SPEED_BOOST = Shooter.UNIT_MOVE;
 		powerStatus = PowerStatus.SPEED;
 	}
 
-	public void deactivateSpeed() {
+	private void deactivateSpeed() {
 		Shooter.SPEED_BOOST = 0;
 		powerStatus = PowerStatus.NONE;
 	}
 
-	public void activateExtraBullets() {
-		Shooter.EXTRA_BULLETS = Shooter.MAX_BULLETS;
+	private void activateExtraBullets() {
+		Shooter.EXTRA_BULLETS = 1;
 		powerStatus = PowerStatus.EXTRA_BULLETS;
 	}
 
-	public void deactivateExtraBullets() {
+	private void deactivateExtraBullets() {
 		Shooter.EXTRA_BULLETS = 0;
 		powerStatus = PowerStatus.NONE;
 	}
