@@ -12,16 +12,23 @@ import javax.swing.Timer;
 import controller.KeyController;
 import controller.TimerListener;
 import model.EnemyComposite;
+import model.PowerUpMeter;
 import model.Shooter;
 import model.ShooterElement;
 import model.builderStrategy.PowerBuilderDirector;
 
 public class GameBoard {
 	
-	public static final int WIDTH = 600;
-	public static final int HEIGHT = 400;
+	public static final int MENU_SCREEN_HEIGHT = 100;
+	public static final int MENU_SCREEN_WIDTH = 0;
+	public static final int GAME_SCREEN_HEIGHT = 400;
+	public static final int GAME_SCREEN_WIDTH = 600;
+	
+	public static final int WIDTH = MENU_SCREEN_WIDTH + GAME_SCREEN_WIDTH;
+	public static final int HEIGHT = MENU_SCREEN_HEIGHT + GAME_SCREEN_HEIGHT;
 
 	public static boolean isGameOver = false;
+	public static boolean isGameWaiting = true;
 	public static boolean gameWon = false;
 	public static int score = 0;
 
@@ -41,6 +48,9 @@ public class GameBoard {
 	private Shooter shooter;
 	private EnemyComposite enemyComposite;
 	private PowerBuilderDirector powerBuilderDirector;
+	private PowerUpMeter powerUpMeter;
+	private TextDraw scoreText = new TextDraw("Score: " + score, 10, GameBoard.GAME_SCREEN_HEIGHT + 70, Color.white, 23);
+	private TextDraw meterText = new TextDraw("PowerUp Meter", 150 + 20, GameBoard.GAME_SCREEN_HEIGHT + 35, Color.white, 10);
 
 	public GameBoard(JFrame window) {
 		this.window = window;
@@ -71,13 +81,18 @@ public class GameBoard {
 		timer = new Timer(DELAY, timerListener);
 		
 		startButton.addActionListener(e -> {
-			shooter = new Shooter(GameBoard.WIDTH / 2, GameBoard.HEIGHT - ShooterElement.SIZE);
+			shooter = new Shooter(GameBoard.GAME_SCREEN_WIDTH / 2, GameBoard.GAME_SCREEN_HEIGHT - ShooterElement.SIZE);
 			enemyComposite = new EnemyComposite();
 			enemyComposite.setGameBoard(this);
 			powerBuilderDirector = new PowerBuilderDirector(this);
+			powerUpMeter = new PowerUpMeter(150 + 20, GameBoard.GAME_SCREEN_HEIGHT + 45, GAME_SCREEN_WIDTH - 190, 40, Color.white);
 			canvas.getGameElements().clear();
+			canvas.getGameElements().add(powerUpMeter);
+			canvas.getGameElements().add(scoreText);
+			canvas.getGameElements().add(meterText);
 			canvas.getGameElements().add(shooter);
 			canvas.getGameElements().add(enemyComposite);
+			isGameWaiting = false;
 			timer.start();
 		});
 
@@ -137,6 +152,18 @@ public class GameBoard {
 
 	public PowerBuilderDirector getPowerBuilderDirector() {
 		return powerBuilderDirector;
+	}
+	
+	public PowerUpMeter getPowerUpMeter() {
+		return powerUpMeter;
+	}
+
+	public TextDraw getScoreText() {
+		return scoreText;
+	}
+
+	public TextDraw getMeterText() {
+		return meterText;
 	}
 
 }
