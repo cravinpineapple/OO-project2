@@ -321,10 +321,9 @@ public class EnemyComposite extends GameElement {
 					removePowers.add(p);
 					// type cast GameElemnt p to Power p so we can access activatePower(shooter)
 					Power power = (Power) p;
-					// starts power up timer & clear current power up
-					gameBoard.getPowerUpMeter().startPowerUpMeter();
 					// start new power up
 					power.activatePower(shooter);
+					shooter.notifyListener();
 				}
 				else if (p.y >= GameBoard.GAME_SCREEN_HEIGHT)
 					removePowers.add(p);
@@ -341,6 +340,10 @@ public class EnemyComposite extends GameElement {
 
 	public void setGameBoard(GameBoard gameBoard) {
 		this.gameBoard = gameBoard;
+	}
+
+	public ArrayList<ArrayList<GameElement>> getRows() {
+		return rows;
 	}
 	
 }
