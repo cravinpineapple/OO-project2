@@ -7,9 +7,10 @@ import java.awt.Color;
 
 import javax.swing.Timer;
 
+import model.observerStrategy.Observer;
 import view.GameBoard;
 
-public class PowerUpMeter extends GameElement {
+public class PowerUpMeter extends GameElement implements Observer {
 
 	// reference to gameBoard so we can turn off shooter power ups
 	GameBoard gameBoard;
@@ -28,6 +29,7 @@ public class PowerUpMeter extends GameElement {
 
 			if (width == 0) {
 				gameBoard.getShooter().deactivatePower();
+				gameBoard.getShooter().notifyListener();
 				timer.stop();
 			}
 		}
@@ -48,7 +50,6 @@ public class PowerUpMeter extends GameElement {
 	}
 
 	public void startPowerUpMeter() {
-		gameBoard.getShooter().deactivatePower();
 		width = width2;
 		timer.start();
 	}
@@ -70,8 +71,10 @@ public class PowerUpMeter extends GameElement {
 
 	}
 
-
-
-	
-	
+	@Override
+	public void actionPerformed(boolean hasPower) {
+		// start power up meter
+		if (hasPower)
+			startPowerUpMeter();
+	}	
 }
