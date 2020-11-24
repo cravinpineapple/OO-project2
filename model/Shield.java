@@ -5,12 +5,7 @@ import java.awt.Graphics2D;
 
 public class Shield extends GameElement {
 
-	// shooter reference so animate w/ shooter
-	private Shooter shooter;
-
 	public Shield(Shooter shooter) {
-		this.shooter = shooter;
-
 		filled = true;
 		x = shooter.x - 30;
 		y = shooter.y - 40;
@@ -32,9 +27,6 @@ public class Shield extends GameElement {
 
 	// animation done with moveRight / moveLeft in Shooter.java
 	@Override
-	public void animate() {
-		// x = shooter.x - 30;
-		// y = shooter.y - 40;
-	}
+	public void animate() { }
 	
 }
