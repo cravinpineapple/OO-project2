@@ -11,6 +11,7 @@ import javax.swing.Timer;
 
 import controller.KeyController;
 import controller.TimerListener;
+import model.Enemy;
 import model.EnemyComposite;
 import model.PowerUpMeter;
 import model.Shooter;
@@ -81,18 +82,32 @@ public class GameBoard {
 		timer = new Timer(DELAY, timerListener);
 		
 		startButton.addActionListener(e -> {
+			// setting up game elements
 			shooter = new Shooter(GameBoard.GAME_SCREEN_WIDTH / 2, GameBoard.GAME_SCREEN_HEIGHT - ShooterElement.SIZE);
 			enemyComposite = new EnemyComposite();
 			enemyComposite.setGameBoard(this);
 			powerBuilderDirector = new PowerBuilderDirector(this);
 			powerUpMeter = new PowerUpMeter(150 + 20, GameBoard.GAME_SCREEN_HEIGHT + 45, GAME_SCREEN_WIDTH - 190, 40, Color.white);
 			powerUpMeter.setGameBoard(this);
+
+			// adding game elements to to-be-rendered array list
 			canvas.getGameElements().clear();
 			canvas.getGameElements().add(powerUpMeter);
 			canvas.getGameElements().add(scoreText);
 			canvas.getGameElements().add(meterText);
 			canvas.getGameElements().add(shooter);
 			canvas.getGameElements().add(enemyComposite);
+
+			// assigning listeners to subject (observerStrategy)
+			shooter.addListener(powerUpMeter);
+			// each enemy in enemyComposite added
+			for (var r: enemyComposite.getRows()) {
+				for (var c: r) {
+					var enemy = (Enemy) c;
+					shooter.addListener(enemy); 
+				}
+			}
+
 			isGameWaiting = false;
 			timer.start();
 		});
