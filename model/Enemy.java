@@ -1,9 +1,12 @@
 package model;
 
 import java.awt.Graphics2D;
+
+import model.observerStrategy.Observer;
+
 import java.awt.Color;
 
-public class Enemy extends GameElement {
+public class Enemy extends GameElement implements Observer {
 
 	public Enemy(int x, int y, int size, Color color, boolean filled) {
 		super(x, y, color, filled, size, size);
@@ -23,5 +26,12 @@ public class Enemy extends GameElement {
 	public void animate() {
 		// composite group of enemies
 	}
-	
+
+	@Override
+	public void actionPerformed(boolean hasPower) {
+		if (hasPower)
+			color = Color.red;
+		else
+			color = Color.yellow;
+	}
 }
