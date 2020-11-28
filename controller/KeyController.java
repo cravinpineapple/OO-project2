@@ -28,6 +28,8 @@ public class KeyController implements KeyListener {
 			case KeyEvent.VK_SPACE:
 				eventQueue.add(TimerListener.EventType.KEY_SPACE);
 				break;
+			case KeyEvent.VK_H:
+				GameBoard.showHitBox = !GameBoard.showHitBox;
 		}
 	}
 
