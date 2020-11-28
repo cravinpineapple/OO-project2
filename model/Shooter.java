@@ -24,7 +24,7 @@ public class Shooter extends GameElement implements Subject {
 	private ArrayList<GameElement> weapons = new ArrayList<>();
 	private Shield shield;
 	public Shooter extraShooter;
-	private boolean isExtraShooter = false;
+	public boolean isExtraShooter = false;
 
 	// power management
 	public enum PowerStatus {
@@ -53,7 +53,7 @@ public class Shooter extends GameElement implements Subject {
 		super(x, y, 0, 0);
 
 		isExtraShooter = true;
-		var s1 = new ShooterElement(x - size, y - size, Color.white, false); // top left
+		var s1 = new ShooterElement(this, x - size, y - size, Color.white, false, PictureStore.fullCookie); // top left
 
 		components.add(s1);
 	}
