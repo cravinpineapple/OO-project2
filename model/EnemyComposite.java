@@ -190,9 +190,9 @@ public class EnemyComposite extends GameElement {
 			float randomPowerUp = random.nextFloat();
 			
 			if (randomPowerUp < 0.1F)
-				pbDirector.setPowerBuilder(new ExtraShooterPowerBuilder());
-			else if (randomPowerUp < 0.4F)
 				pbDirector.setPowerBuilder(new SpeedPowerBuilder());
+			else if (randomPowerUp < 0.4F)
+				pbDirector.setPowerBuilder(new ExtraShooterPowerBuilder());
 			else if (randomPowerUp < 0.7F)
 				pbDirector.setPowerBuilder(new DoubleBulletsPowerBuilder());
 			else
