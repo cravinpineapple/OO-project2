@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import model.Power.PowerType;
 import model.observerStrategy.Observer;
 import model.observerStrategy.Subject;
+import pictures.PictureStore;
 import view.GameBoard;
 
 public class Shooter extends GameElement implements Subject {
@@ -37,10 +38,10 @@ public class Shooter extends GameElement implements Subject {
 
 		// building shooter body
 		var size = ShooterElement.SIZE;
-		var s1 = new ShooterElement(x - size, y - size, Color.white, false); // top left
-		var s2 = new ShooterElement(x, y - size, Color.white, false); // top right
-		var s3 = new ShooterElement(x - size, y, Color.white, false); // bottom left
-		var s4 = new ShooterElement(x, y, Color.white, false); // bottom right
+		var s1 = new ShooterElement(this, x - size, y - size, Color.white, false, PictureStore.tLeftCookie); // top left
+		var s2 = new ShooterElement(this, x, y - size, Color.white, false, PictureStore.tRightCookie); // top right
+		var s3 = new ShooterElement(this, x - size, y, Color.white, false, PictureStore.bLeftCookie); // bottom left
+		var s4 = new ShooterElement(this, x, y, Color.white, false, PictureStore.bRightCookie); // bottom right
 		components.add(s1);
 		components.add(s2);
 		components.add(s3);
