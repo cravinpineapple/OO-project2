@@ -17,9 +17,9 @@ import view.GameBoard.ScoreCategory;
 public class EnemyComposite extends GameElement {
 
 	public static final int NROWS = 2;
-	public static final int NCOLS = 10;
-	public static final int ENEMY_SIZE = 20;
-	public static final int UNIT_MOVE = 5;
+	public static final int NCOLS = 9; // orig: 9
+	public static final int ENEMY_SIZE = 35; // orig: 20
+	public static final int UNIT_MOVE = 3;
 
 	private ArrayList<ArrayList<GameElement>> rows;
 	private ArrayList<GameElement> bombs;
