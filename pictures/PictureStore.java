@@ -20,9 +20,11 @@ public class PictureStore {
 	public static BufferedImage tRightCookie; // top right
 	public static BufferedImage bLeftCookie; // bottom left
 	public static BufferedImage bRightCookie; // bottom right
+	public static BufferedImage fullCookie; // extra shooter
 
 
 	public static int[] playerXY = {60, 60};
+	public static int[] extraShooterXY = {30, 30};
 	public static int[] enemyXY = {45, 45};
 	
 	
@@ -40,6 +42,7 @@ public class PictureStore {
 		tRightCookie = readImage("pictures/shooter/tRightCookie.png", playerXY[0], playerXY[1]);
 		bLeftCookie = readImage("pictures/shooter/bLeftCookie.png", playerXY[0], playerXY[1]);
 		bRightCookie = readImage("pictures/shooter/bRightCookie.png", playerXY[0], playerXY[1]);
+		fullCookie = readImage("pictures/shooter/fullCookie.png", extraShooterXY[0], extraShooterXY[1]);
 	}
 
 	// reads from file and scales to width & height
