@@ -27,11 +27,10 @@ public class ShooterElement extends GameElement {
 	public void render(Graphics2D g2) {
 		g2.setColor(color);
 
-		if (shooter != null)
+		if (shooter.isExtraShooter)
+			g2.drawImage(image, null, shooter.x - width / 4, shooter.y - width / 4);
+		else
 			g2.drawImage(image, null, shooter.x - width, shooter.y - width);
-
-		if (shooter == null)
-			System.out.println("why??"); // ** BUG BUG BUG (on collision w/ powerups and enemy bullets SOMETIMES)
 
 		// hit box rendering
 		if (GameBoard.showHitBox)
