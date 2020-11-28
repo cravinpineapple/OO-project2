@@ -22,8 +22,8 @@ public class GameBoard {
 	
 	public static final int MENU_SCREEN_HEIGHT = 100;
 	public static final int MENU_SCREEN_WIDTH = 0;
-	public static final int GAME_SCREEN_HEIGHT = 400;
-	public static final int GAME_SCREEN_WIDTH = 600;
+	public static final int GAME_SCREEN_HEIGHT = 500; // orig: 400
+	public static final int GAME_SCREEN_WIDTH = 750;  // orig: 600
 	
 	public static final int WIDTH = MENU_SCREEN_WIDTH + GAME_SCREEN_WIDTH;
 	public static final int HEIGHT = MENU_SCREEN_HEIGHT + GAME_SCREEN_HEIGHT;
@@ -31,6 +31,7 @@ public class GameBoard {
 	public static boolean isGameOver = false;
 	public static boolean isGameWaiting = true;
 	public static boolean gameWon = false;
+	public static boolean showHitBox = false;
 	public static int score = 0;
 
 	public enum ScoreCategory {
@@ -53,6 +54,8 @@ public class GameBoard {
 	private TextDraw scoreText = new TextDraw("Score: " + score, 10, GameBoard.GAME_SCREEN_HEIGHT + 70, Color.white, 23);
 	private TextDraw meterText = new TextDraw("PowerUp Meter", 150 + 20, GameBoard.GAME_SCREEN_HEIGHT + 35, Color.white, 10);
 
+	JButton startButton;
+
 	public GameBoard(JFrame window) {
 		this.window = window;
 	}
@@ -66,7 +69,7 @@ public class GameBoard {
 		canvas.setFocusable(true);
 		cp.add(BorderLayout.CENTER, canvas);
 
-		JButton startButton = new JButton("Start");
+		startButton = new JButton("Start");
 		JButton quitButton = new JButton("Quit");
 		startButton.setFocusable(false);
 		quitButton.setFocusable(false);
@@ -82,6 +85,10 @@ public class GameBoard {
 		timer = new Timer(DELAY, timerListener);
 		
 		startButton.addActionListener(e -> {
+			// init doesn't work to restart
+			if (isGameOver)
+				init();
+
 			// setting up game elements
 			shooter = new Shooter(GameBoard.GAME_SCREEN_WIDTH / 2, GameBoard.GAME_SCREEN_HEIGHT - ShooterElement.SIZE);
 			enemyComposite = new EnemyComposite();
@@ -114,6 +121,7 @@ public class GameBoard {
 
 		quitButton.addActionListener(e -> System.exit(0));
 	}
+	
 
 	// ends the game, passed if user won or lost
 	public static void setGameWon(boolean gameWon) {
@@ -122,6 +130,7 @@ public class GameBoard {
 	}
 
 	public void gameOver() {
+		startButton.setText("Play Again");
 		if (gameWon) {
 			timer.stop();
 			System.out.println("Yo, we won!");
