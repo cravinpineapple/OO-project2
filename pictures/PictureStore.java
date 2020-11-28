@@ -22,8 +22,8 @@ public class PictureStore {
 	public static BufferedImage bRightCookie; // bottom right
 
 
-	public static int[] playerXY = {40, 40};
-	public static int[] enemyXY = {40, 40};
+	public static int[] playerXY = {60, 60};
+	public static int[] enemyXY = {45, 45};
 	
 	
 	// executed before main method
