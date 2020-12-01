@@ -40,6 +40,7 @@ public class GameBoard {
 	public static boolean showHitBox = false;
 	public static int score = 0;
 
+	// strategyPattern
 	private LevelActivator levelActivator;
 	public static int levelCount = 0; // tracks what level we are currently on
 	public static boolean changingLevel = true;
