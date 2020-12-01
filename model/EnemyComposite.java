@@ -195,8 +195,6 @@ public class EnemyComposite extends GameElement {
 	private void powerUpChance(int spawnX, int spawnY) {
 		float powerUpChance = random.nextFloat();
 		float powerUpChanceOdds = GameBoard.levelCount / 10F;
-		System.out.println("Chance: " + powerUpChance);
-		System.out.println("Odds: " + powerUpChanceOdds);
 		if (powerUpChance < powerUpChanceOdds) {
 			PowerBuilderDirector pbDirector = gameBoard.getPowerBuilderDirector();
 			float randomPowerUp = random.nextFloat();
