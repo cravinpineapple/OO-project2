@@ -30,8 +30,8 @@ public class Shooter extends GameElement implements Subject {
 	public enum PowerStatus {
 		NONE, SPEED, SHIELD, EXTRA_BULLETS, EXTRA_SHOOTER
 	}
-	boolean hasPower = false;
-	PowerStatus powerStatus = PowerStatus.NONE;
+	private boolean hasPower = false;
+	private PowerStatus powerStatus = PowerStatus.NONE;
 
 	public Shooter(int x, int y) {
 		super(x, y, 0, 0);
