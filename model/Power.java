@@ -1,6 +1,10 @@
 package model;
 
 import java.awt.Graphics2D;
+
+import pictures.PictureStore;
+import view.GameBoard;
+
 import java.awt.Color;
 
 public class Power extends GameElement {
@@ -9,11 +13,31 @@ public class Power extends GameElement {
 		SPEED, SHIELD, EXTRA_BULLETS, EXTRA_SHOOTER
 	}
 
+	public static final int WIDTH = 30;
+	public static final int HEIGHT = 30;
+
 	private int fallSpeed;
 	private PowerType powerType;
 
 	public Power() {
 		filled = true;
+	}
+
+	private void setPowerImage() {
+		switch (powerType) {
+			case SPEED:
+				image = PictureStore.speedPower;
+				break;
+			case SHIELD:
+				image = PictureStore.shieldPower;
+				break;
+			case EXTRA_BULLETS:
+				image = PictureStore.bulletPower;
+				break;
+			case EXTRA_SHOOTER:
+				image = PictureStore.shooterPower;
+				break;
+		}
 	}
 
 	public void setPosition(int x, int y) {
@@ -36,23 +60,22 @@ public class Power extends GameElement {
 
 	public void setPowerType(PowerType powerType) {
 		this.powerType = powerType;
+		setPowerImage();
 	}
 
 	public void activatePower(Shooter shooter) {
 		// startPowerTimer
-
 		shooter.activatePower(powerType);
 	}
 
 	@Override
 	public void render(Graphics2D g2) {
 		g2.setColor(color);
-		if (filled) {
-			g2.fillOval(x, y, width, height);
-		}
-		else {
-			g2.drawOval(x, y, width, height);
-		}
+
+		g2.drawImage(image, null, x, y);
+		
+		if (GameBoard.showHitBox)
+			g2.fillRect(x, y, width, height);
 	}
 
 	@Override

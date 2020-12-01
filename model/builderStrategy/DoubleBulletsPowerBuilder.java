@@ -18,7 +18,7 @@ public class DoubleBulletsPowerBuilder extends PowerBuilder {
 
 	@Override
 	public void buildSize() {
-		power.setSize(10, 5);
+		power.setSize(Power.WIDTH, Power.HEIGHT);
 	}
 
 	@Override
