@@ -41,7 +41,7 @@ public class GameBoard {
 	public static int score = 0;
 
 	private LevelActivator levelActivator;
-	public static int levelCount = 4; // tracks what level we are currently on
+	public static int levelCount = 0; // tracks what level we are currently on
 	public static boolean changingLevel = true;
 
 
@@ -96,6 +96,13 @@ public class GameBoard {
 		timer = new Timer(DELAY, timerListener);
 		
 		startButton.addActionListener(e -> {
+			if (isGameOver) {
+				gameWon = false;
+				isGameOver = false;
+				score = 0;
+				levelCount = 0;
+			}
+
 			// setting up game elements
 			shooter = new Shooter(GameBoard.GAME_SCREEN_WIDTH / 2, GameBoard.GAME_SCREEN_HEIGHT - ShooterElement.SIZE);
 			enemyComposite = new EnemyComposite();
@@ -148,7 +155,6 @@ public class GameBoard {
 		}
 
 		// incrementing for next level if all enemies killed
-		assignEnemyListeners();
 		levelCount++;
 	}
 
@@ -166,6 +172,9 @@ public class GameBoard {
 	public void beginLevel() {
 		levelActivator.setLevelSettings();
 		levelActivator.startLevel();
+
+		// assigning enemy listeners b/c new ones made each level
+		assignEnemyListeners();
 	}
 
 	// ends the game, passed if user won or lost
@@ -176,14 +185,7 @@ public class GameBoard {
 
 	public void gameOver() {;
 		startButton.setText("Play Again");
-		if (gameWon) {
-			timer.stop();
-			System.out.println("Yo, we won!");
-		}
-		else {
-			timer.stop();
-			System.out.println("Yo, we lost!");
-		}
+		timer.stop();
 	}
 
 	public static void increaseScore(ScoreCategory pointCategory) {
