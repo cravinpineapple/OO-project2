@@ -15,6 +15,8 @@ public class MyCanvas extends JPanel {
 	private GameBoard gameBoard;
 	private ArrayList<GameElement> gameElements = new ArrayList<>();
 
+	public TextDraw levelText;
+
 	public MyCanvas(GameBoard gameBoard, int width, int height) {
 		this.gameBoard = gameBoard;
 		setBackground(Color.black);
@@ -50,6 +52,9 @@ public class MyCanvas extends JPanel {
 		for (var e: gameElements) {
 			e.render(g2);
 		}
+
+		if (levelText != null)
+			levelText.render(g2);
 	}
 
 	public ArrayList<GameElement> getGameElements() {
