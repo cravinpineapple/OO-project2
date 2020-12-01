@@ -17,9 +17,9 @@ import view.GameBoard.ScoreCategory;
 public class EnemyComposite extends GameElement {
 
 	public static final int NROWS = 2;
-	public static final int NCOLS = 9; // orig: 9
+	public static int NCOLS = 9; // orig: 9
 	public static final int ENEMY_SIZE = 35; // orig: 20
-	public static final int UNIT_MOVE = 3;
+	public static int UNIT_MOVE = 3;
 
 	private ArrayList<ArrayList<GameElement>> rows;
 	private ArrayList<GameElement> bombs;
@@ -33,6 +33,14 @@ public class EnemyComposite extends GameElement {
 		rows = new ArrayList<>();
 		bombs = new ArrayList<>();
 		powers = new ArrayList<>();
+	}
+
+	public void initEnemyComposite() {
+		for (var r: rows) {
+			r.clear();
+		}
+
+		System.out.println("N COLS: " + NCOLS);
 
 		for (int r = 0; r < NROWS; r++) {
 			var oneRow = new ArrayList<GameElement>();
@@ -179,8 +187,10 @@ public class EnemyComposite extends GameElement {
 				enemiesGone = false;
 		}
 
-		if (enemiesGone)
+		if (enemiesGone && GameBoard.levelCount == 5)
 			GameBoard.setGameWon(true);
+		else if (enemiesGone)
+			gameBoard.startNextLevel();
 	}
 
 	// passes in cords for spawn location (at enemy death location)
