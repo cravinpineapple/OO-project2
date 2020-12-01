@@ -23,7 +23,14 @@ public class Enemy extends GameElement implements Observer {
 
 	private void setEnemyImages() {
 		Random rand = new Random();
-		switch (rand.nextInt(4)) { // **temporarily generating 3 until 4th graphic complete
+		
+		// generating enemy graphics depending on what level we are on
+		// 		higher level = more variety
+		int bound = GameBoard.levelCount;
+		if (bound == 5)
+			bound = 4;
+
+		switch (rand.nextInt(bound)) {
 			case 0:
 				image = normalImage = PictureStore.normalCarrot;
 				angryImage = PictureStore.angryCarrot;
