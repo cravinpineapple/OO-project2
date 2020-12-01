@@ -40,8 +40,6 @@ public class EnemyComposite extends GameElement {
 			r.clear();
 		}
 
-		System.out.println("N COLS: " + NCOLS);
-
 		for (int r = 0; r < NROWS; r++) {
 			var oneRow = new ArrayList<GameElement>();
 			rows.add(oneRow);
@@ -195,7 +193,11 @@ public class EnemyComposite extends GameElement {
 
 	// passes in cords for spawn location (at enemy death location)
 	private void powerUpChance(int spawnX, int spawnY) {
-		if (true) {
+		float powerUpChance = random.nextFloat();
+		float powerUpChanceOdds = GameBoard.levelCount / 10F;
+		System.out.println("Chance: " + powerUpChance);
+		System.out.println("Odds: " + powerUpChanceOdds);
+		if (powerUpChance < powerUpChanceOdds) {
 			PowerBuilderDirector pbDirector = gameBoard.getPowerBuilderDirector();
 			float randomPowerUp = random.nextFloat();
 			

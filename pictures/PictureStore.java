@@ -33,7 +33,6 @@ public class PictureStore {
 	// executed before main method
 	static {
 		String cwd = System.getProperty("user.dir");
-		System.out.println("cwd: " + cwd);
 		angryStrawberry = readImage("pictures/enemies/angryStrawberry.png", enemyXY[0], enemyXY[1]);
 		normalStrawberry = readImage("pictures/enemies/normalStrawberry.png", enemyXY[0], enemyXY[1]);
 		angryCarrot = readImage("pictures/enemies/angryCarrot.png", enemyXY[0], enemyXY[1]);
