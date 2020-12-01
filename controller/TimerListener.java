@@ -100,7 +100,10 @@ public class TimerListener implements ActionListener {
 		var enemyComposite = gameBoard.getEnemyComposite();
 
 		shooter.checkPlayerComponents();
-		enemyComposite.checkAllEnemiesKilled();
+		
+		// if changing level, no enemies, so don't check
+		if (!GameBoard.changingLevel)
+			enemyComposite.checkAllEnemiesKilled();
 
 		for (var e: gameBoard.getCanvas().getGameElements())
 			e.animate();
