@@ -17,6 +17,12 @@ import model.PowerUpMeter;
 import model.Shooter;
 import model.ShooterElement;
 import model.builderStrategy.PowerBuilderDirector;
+import model.strategyPattern.Level1;
+import model.strategyPattern.Level2;
+import model.strategyPattern.Level3;
+import model.strategyPattern.Level4;
+import model.strategyPattern.Level5;
+import model.strategyPattern.LevelActivator;
 
 public class GameBoard {
 	
@@ -33,6 +39,11 @@ public class GameBoard {
 	public static boolean gameWon = false;
 	public static boolean showHitBox = false;
 	public static int score = 0;
+
+	private LevelActivator levelActivator;
+	public static int levelCount = 4; // tracks what level we are currently on
+	public static boolean changingLevel = true;
+
 
 	public enum ScoreCategory {
 		ENEMY_KILL, BULLET_KILL, POWERUP_GET
@@ -85,10 +96,6 @@ public class GameBoard {
 		timer = new Timer(DELAY, timerListener);
 		
 		startButton.addActionListener(e -> {
-			// init doesn't work to restart
-			if (isGameOver)
-				init();
-
 			// setting up game elements
 			shooter = new Shooter(GameBoard.GAME_SCREEN_WIDTH / 2, GameBoard.GAME_SCREEN_HEIGHT - ShooterElement.SIZE);
 			enemyComposite = new EnemyComposite();
@@ -104,24 +111,62 @@ public class GameBoard {
 			canvas.getGameElements().add(meterText);
 			canvas.getGameElements().add(shooter);
 			canvas.getGameElements().add(enemyComposite);
-
-			// assigning listeners to subject (observerStrategy)
 			shooter.addListener(powerUpMeter);
-			// each enemy in enemyComposite added
-			for (var r: enemyComposite.getRows()) {
-				for (var c: r) {
-					var enemy = (Enemy) c;
-					shooter.addListener(enemy); 
-				}
-			}
 
 			isGameWaiting = false;
 			timer.start();
+
+			startNextLevel();
 		});
 
 		quitButton.addActionListener(e -> System.exit(0));
 	}
-	
+
+	// using strategy
+	//	sets the next level activator 
+	public void startNextLevel() {
+		switch (levelCount) {
+			case 0:
+				levelActivator = new Level1(this);
+				break;
+			case 1:
+				levelActivator = new Level2(this);
+				break;
+			case 2:
+				levelActivator = new Level3(this);
+				break;
+			case 3:
+				levelActivator = new Level4(this);
+				break;
+			case 4:
+				levelActivator = new Level5(this);
+				break;
+			default:
+				setGameWon(true);
+				gameOver();
+				break;
+		}
+
+		// incrementing for next level if all enemies killed
+		assignEnemyListeners();
+		levelCount++;
+	}
+
+	// assigning listeners to subject (observerStrategy)
+		// each enemy in enemyComposite added
+	public void assignEnemyListeners() {
+		for (var r: enemyComposite.getRows()) {
+			for (var c: r) {
+				var enemy = (Enemy) c;
+				shooter.addListener(enemy); 
+			}
+		}
+	}
+
+	public void beginLevel() {
+		levelActivator.setLevelSettings();
+		levelActivator.startLevel();
+	}
 
 	// ends the game, passed if user won or lost
 	public static void setGameWon(boolean gameWon) {
@@ -129,7 +174,7 @@ public class GameBoard {
 		GameBoard.isGameOver = true;
 	}
 
-	public void gameOver() {
+	public void gameOver() {;
 		startButton.setText("Play Again");
 		if (gameWon) {
 			timer.stop();
