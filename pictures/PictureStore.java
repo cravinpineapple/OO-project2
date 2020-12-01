@@ -35,6 +35,9 @@ public class PictureStore {
 	public static BufferedImage shieldPower;
 	public static BufferedImage shooterPower;
 
+	// background
+	public static BufferedImage background;
+
 
 	public static int[] playerXY = {60, 60};
 	public static int[] extraShooterXY = {30, 30};
@@ -65,6 +68,7 @@ public class PictureStore {
 		bulletPower = readImage("pictures/other/bulletPower.png", powerXY[0], powerXY[1]);
 		shieldPower = readImage("pictures/other/shieldPower.png", powerXY[0], powerXY[1]);
 		shooterPower = readImage("pictures/other/shooterPower.png", powerXY[0], powerXY[1]);
+		background = readImage("pictures/other/background.png", 750, 500);
 	}
 
 	// reads from file and scales to width & height

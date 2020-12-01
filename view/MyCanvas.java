@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import javax.swing.JPanel;
 
 import model.GameElement;
+import pictures.PictureStore;
 
 public class MyCanvas extends JPanel {
 	
@@ -43,6 +44,7 @@ public class MyCanvas extends JPanel {
 			g2.setColor(Color.white);
 			g2.fillRect(0, GameBoard.GAME_SCREEN_HEIGHT + 10, GameBoard.GAME_SCREEN_WIDTH, 10);
 			g2.fillRect(150, GameBoard.GAME_SCREEN_HEIGHT + 10, 10, GameBoard.HEIGHT - GameBoard.GAME_SCREEN_HEIGHT + 10);
+			g2.drawImage(PictureStore.background, null, 0, 0);
 		}
 
 		
