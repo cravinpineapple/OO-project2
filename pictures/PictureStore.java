@@ -16,6 +16,8 @@ public class PictureStore {
 	public static BufferedImage normalCarrot;
 	public static BufferedImage angryOnion;
 	public static BufferedImage normalOnion;
+	public static BufferedImage angryRadish;
+	public static BufferedImage normalRadish;
 	public static BufferedImage tLeftCookie; // top left
 	public static BufferedImage tRightCookie; // top right
 	public static BufferedImage bLeftCookie; // bottom left
@@ -38,6 +40,8 @@ public class PictureStore {
 		normalCarrot = readImage("pictures/enemies/normalCarrot.png", enemyXY[0], enemyXY[1]);
 		angryOnion = readImage("pictures/enemies/angryOnion.png", enemyXY[0], enemyXY[1]);
 		normalOnion = readImage("pictures/enemies/normalOnion.png", enemyXY[0], enemyXY[1]);
+		angryRadish = readImage("pictures/enemies/angryRadish.png", enemyXY[0], enemyXY[1]);
+		normalRadish = readImage("pictures/enemies/normalRadish.png", enemyXY[0], enemyXY[1]);
 		tLeftCookie = readImage("pictures/shooter/tLeftCookie.png", playerXY[0], playerXY[1]);
 		tRightCookie = readImage("pictures/shooter/tRightCookie.png", playerXY[0], playerXY[1]);
 		bLeftCookie = readImage("pictures/shooter/bLeftCookie.png", playerXY[0], playerXY[1]);
