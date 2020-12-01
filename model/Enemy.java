@@ -23,7 +23,7 @@ public class Enemy extends GameElement implements Observer {
 
 	private void setEnemyImages() {
 		Random rand = new Random();
-		switch (rand.nextInt(3)) { // **temporarily generating 3 until 4th graphic complete
+		switch (rand.nextInt(4)) { // **temporarily generating 3 until 4th graphic complete
 			case 0:
 				image = normalImage = PictureStore.normalCarrot;
 				angryImage = PictureStore.angryCarrot;
@@ -37,8 +37,8 @@ public class Enemy extends GameElement implements Observer {
 				angryImage = PictureStore.angryOnion;
 				break;
 			case 3:
-				// image = PictureStore. 4th normal enemy image
-				// image2 = PictureStore. 4th angry enemy image
+				image = normalImage = PictureStore.normalRadish;
+				angryImage = PictureStore.angryRadish;
 				break;
 
 		}
