@@ -7,8 +7,8 @@ public class Shield extends GameElement {
 
 	public Shield(Shooter shooter) {
 		filled = true;
-		x = shooter.x - 30;
-		y = shooter.y - 40;
+		x = shooter.x - 40;
+		y = shooter.y - 50;
 		width = ShooterElement.SIZE * 2 + 20;
 		height = 5;
 		color = Color.cyan;
